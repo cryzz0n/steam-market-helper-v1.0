@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Steam Market Helper",
+  "version": "1.0",
+  "description": "Трекинг сделок Steam: расчёт прибыли, комиссии, маржи. Групповые продажи, заметки, графики, тёмная/светлая тема.",
+  "action": {
+    "default_title": "Steam Market Helper",
+    "default_popup": "popup.html",
+    "default_width": 700,
+    "default_height": 650
+  },
+  "permissions": [
+    "storage"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
