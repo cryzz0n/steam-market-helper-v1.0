@@ -14,34 +14,72 @@
   <script src="./chart-loader.js"></script>
 </head>
 <body class="page-wide">
-  <div class="app-shell">
-    <header class="topbar">
-      <div class="topbar-left">
-        <div class="brand glitch-title" data-i18n="appName" data-text="Steam Market Helper">🎮 Steam Market Helper</div>
-        <div class="subtitle" data-i18n="historyTitle">Полная история сделок</div>
-      </div>
-      <div class="topbar-right" style="display: flex; gap: 10px;">
-        <select id="themeSelect" style="width: auto; padding: 4px 8px; font-size: 12px;">
-          <option value="system" data-i18n="themeSystem">🌓 Системная</option>
-          <option value="dark" data-i18n="themeDark">🌑 Тёмная</option>
-          <option value="light" data-i18n="themeLight">☀️ Светлая</option>
-        </select>
-        <select id="languageSelect" style="width: auto; padding: 4px 8px; font-size: 12px;">
-          <option value="ru">🇷🇺 Русский</option>
-          <option value="en">🇬🇧 English</option>
-        </select>
-        <button id="donateBtn" class="ghost" type="button" title="Поддержать проект" data-i18n="donate">❤️ Донат</button>
-        <button id="openPopupHint" class="ghost" type="button" title="Open calculator">🧮 Калькулятор</button>
-      </div>
-    </header>
+  <div class="app-shell-with-sidebar">
 
+    <!-- БОКОВОЕ МЕНЮ -->
+    <nav class="sidebar">
+      <div class="sidebar-logo">
+        <img src="icons/icon48.png" alt="Steam Market Helper" class="sidebar-logo-img" />
+      </div>
+
+      <ul class="sidebar-nav">
+        <li>
+          <button class="sidebar-btn active" id="sidebarHistoryBtn" data-section="history" title="История сделок">
+            <span class="sidebar-icon">📊</span>
+            <span class="sidebar-label" id="labelHistory">История</span>
+          </button>
+        </li>
+        <li>
+          <button class="sidebar-btn" id="sidebarChartsBtn" data-section="charts" title="Графики">
+            <span class="sidebar-icon">📈</span>
+            <span class="sidebar-label" id="labelCharts">Графики</span>
+          </button>
+        </li>
+      </ul>
+
+      <div class="sidebar-bottom">
+        <button id="donateBtn" class="sidebar-btn" type="button" title="Поддержать проект">
+          <span class="sidebar-icon">❤️</span>
+          <span class="sidebar-label" id="labelDonate">Донат</span>
+        </button>
+        <button id="openPopupHint" class="sidebar-btn" type="button" title="Калькулятор">
+          <span class="sidebar-icon">🧮</span>
+          <span class="sidebar-label" id="labelCalculator">Калькулятор</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="main-area">
+
+      <!-- Топбар -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="brand glitch-title" data-i18n="appName" data-text="Steam Market Helper">🎮 Steam Market Helper</div>
+          <div class="subtitle" id="topbarSubtitle">История сделок</div>
+        </div>
+        <div class="topbar-right">
+          <select id="themeSelect" class="topbar-select">
+            <option value="system" data-i18n="themeSystem">🌓 Системная</option>
+            <option value="dark" data-i18n="themeDark">🌑 Тёмная</option>
+            <option value="light" data-i18n="themeLight">☀️ Светлая</option>
+          </select>
+          <select id="languageSelect" class="topbar-select">
+            <option value="ru">🇷🇺 Русский</option>
+            <option value="en">🇬🇧 English</option>
+          </select>
+        </div>
+      </header>
+
+    <!-- СЕКЦИЯ ИСТОРИЯ -->
     <main class="page-content">
-      <!-- Секция с историей сделок -->
+      <div id="sectionHistory" class="content-section active-section">
       <section class="card history-card">
         <div class="history-header">
           <h2 data-i18n="historyTitle">📊 История сделок</h2>
           <div class="history-actions">
             <button id="exportJsonBtn" type="button" data-i18n="exportJSON">💾 Экспорт JSON</button>
+            <button id="exportCsvBtn" type="button" data-i18n="exportCSV">📊 Экспорт CSV</button>
             <label class="file-btn">
               <span data-i18n="importJSON">📂 Импорт JSON</span>
               <input id="importJsonFile" type="file" accept=".json,application/json" />
@@ -52,19 +90,22 @@
 
         <!-- Фильтры и поиск - ОСНОВНЫЕ -->
         <div class="filter-bar">
-          <div class="search-container" style="flex: 2; display: flex; gap: 8px;">
-            <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Поиск по предмету..." style="flex: 1;">
-            <label class="checkbox-label" style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+          <div class="search-container">
+            <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Поиск по предмету...">
+            <label class="checkbox-label" >
               <input type="checkbox" id="searchInNotes">
               <span data-i18n="searchInNotes">🔍 В заметках</span>
             </label>
           </div>
-          <select id="filterStatus" style="flex: 1;">
+          <select id="filterStatus">
             <option value="all" data-i18n="filterAll">Все</option>
             <option value="open" data-i18n="filterOpen">Куплено</option>
             <option value="sold" data-i18n="filterSold">Продано</option>
           </select>
-          <select id="filterDate" style="flex: 1;">
+          <select id="filterTag">
+            <option value="all" data-i18n="tagsFilterAll">Все теги</option>
+          </select>
+          <select id="filterDate">
             <option value="all" data-i18n="filterAll">За всё время</option>
             <option value="today" data-i18n="filterToday">Сегодня</option>
             <option value="week" data-i18n="filterWeek">Неделя</option>
@@ -75,26 +116,11 @@
         </div>
 
         <!-- Расширенные фильтры - ДАТЫ (скрыты по умолчанию) -->
-        <div id="customDateRange" class="filter-bar hidden" style="margin-top: 5px;">
-          <div style="display: flex; gap: 8px; width: 100%;">
-            <input type="date" id="dateFrom" data-i18n-placeholder="dateFrom" style="flex: 1;">
-            <input type="date" id="dateTo" data-i18n-placeholder="dateTo" style="flex: 1;">
-            <span style="color: var(--muted); font-size: 12px; align-self: center;">—</span>
-          </div>
-        </div>
-
-        <!-- Расширенные фильтры - ЦЕНЫ -->
-        <div class="filter-bar" style="margin-top: 5px;">
-          <div style="display: flex; gap: 8px; width: 100%; align-items: center;">
-            <select id="priceType" style="width: 120px;">
-              <option value="all" data-i18n="priceAll">Все типы</option>
-              <option value="buy" data-i18n="priceBuy">Покупка</option>
-              <option value="sell" data-i18n="priceSell">Продажа</option>
-              <option value="profit" data-i18n="priceProfit">Прибыль</option>
-            </select>
-            <input type="number" id="priceFrom" data-i18n-placeholder="priceFrom" placeholder="Цена от" step="0.01" min="0" style="flex: 1;">
-            <input type="number" id="priceTo" data-i18n-placeholder="priceTo" placeholder="Цена до" step="0.01" min="0" style="flex: 1;">
-            <small class="hint" data-i18n="priceRangeHint">Фильтр по цене</small>
+        <div id="customDateRange" class="filter-bar filter-bar-sub hidden">
+          <div class="date-range-inputs">
+            <input type="date" id="dateFrom" data-i18n-placeholder="dateFrom">
+            <input type="date" id="dateTo" data-i18n-placeholder="dateTo">
+            <span class="date-range-sep">—</span>
           </div>
         </div>
 
@@ -118,7 +144,7 @@
             <thead>
               <tr>
                 <!-- Заголовок для чекбокса (скрыт по умолчанию) -->
-                <th id="checkboxHeader" style="width: 30px; display: none;" class="bulk-checkbox-header"></th>
+                <th id="checkboxHeader" class="bulk-checkbox-header"></th>
                 <th data-sort="date">📅 <span data-i18n="date">Дата</span><span class="sort-indicator"></span></th>
                 <th>⏰ <span data-i18n="time">Время</span></th>
                 <th data-sort="item">📦 <span data-i18n="item">Предмет</span><span class="sort-indicator"></span></th>
@@ -132,6 +158,7 @@
                 <th class="num" data-sort="profit">📈 <span data-i18n="profit">Прибыль</span><span class="sort-indicator"></span></th>
                 <th class="num" data-sort="margin">📊 <span data-i18n="margin">Маржа</span><span class="sort-indicator"></span></th>
                 <th><span data-i18n="status">Статус</span></th>
+                <th><span data-i18n="tags">Теги</span></th>
                 <th><span data-i18n="actions">Действия</span></th>
               </tr>
             </thead>
@@ -152,7 +179,10 @@
         </div>
       </section>
 
-      <!-- Графики - отдельная секция -->
+      </div><!-- /sectionHistory -->
+
+      <!-- СЕКЦИЯ ГРАФИКИ -->
+      <div id="sectionCharts" class="content-section">
       <section class="charts-section">
         <h3 data-i18n="charts">📊 Графики и аналитика</h3>
         
@@ -194,13 +224,54 @@
           </div>
         </div>
       </section>
+      <!-- /charts-section -->
 
       <!-- Информация о синхронизации - отдельно внизу -->
       <div class="sync-info">
         <p class="sync-note" data-i18n="syncNote">☁️ Настройки синхронизируются через Chrome. История хранится локально — для переноса используй экспорт/импорт JSON.</p>
         <p class="sync-note" data-i18n="receivedHint">⚡ Прибыль считается по фактически полученной сумме (поле "На руки")</p>
       </div>
+      </div><!-- /sectionCharts -->
     </main>
+    </div><!-- /main-area -->
+  </div><!-- /app-shell-with-sidebar -->
+
+  <!-- Модальное окно редактирования сделки -->
+  <div id="editModal" class="modal hidden">
+    <div class="modal-content">
+      <h3 data-i18n="editTitle">✏️ Редактировать сделку</h3>
+
+      <label>
+        <span data-i18n="itemName">📦 Название предмета</span>
+        <input id="editItemName" type="text" placeholder="Название предмета" />
+      </label>
+
+      <label>
+        <span data-i18n="buyPrice">💰 Цена покупки</span>
+        <input id="editBuyPrice" type="number" step="0.01" min="0" placeholder="0.00" />
+      </label>
+
+      <label>
+        <span data-i18n="quantity">🔢 Количество</span>
+        <input id="editQuantity" type="number" step="1" min="1" placeholder="1" />
+      </label>
+
+      <label>
+        <span data-i18n="tags">🏷️ Теги</span>
+        <input id="editTags" type="text" data-i18n-placeholder="tagsPlaceholder" placeholder="cs2, knife, rare..." />
+        <small class="hint">Через запятую или пробел</small>
+      </label>
+
+      <label>
+        <span data-i18n="notes">📝 Заметки</span>
+        <textarea id="editNotes" rows="3" data-i18n-placeholder="notesPlaceholder" placeholder="Добавить заметку..."></textarea>
+      </label>
+
+      <div class="row-actions">
+        <button id="editSave" class="primary" data-i18n="editSave">💾 Сохранить</button>
+        <button id="editCancel" data-i18n="cancel">❌ Отмена</button>
+      </div>
+    </div>
   </div>
 
   <!-- Модальное окно продажи (одиночной) -->
@@ -208,15 +279,23 @@
     <div class="modal-content">
       <h3 data-i18n="sellTitle">💰 Продажа предмета</h3>
       <p id="sellItemLabel"></p>
-      
+
+      <label id="sellQuantityLabel">
+        <span data-i18n="sellQuantity">🔢 Сколько продаёшь</span>
+        <div class="sell-qty-row">
+          <input id="sellModalQuantity" type="number" step="1" min="1" value="1" />
+          <span class="sell-qty-max" id="sellQtyMax"></span>
+        </div>
+      </label>
+
       <label>
-        <span data-i18n="sellPrice">🏷️ Цена продажи</span>
+        <span data-i18n="sellPrice">🏷️ Цена продажи / шт</span>
         <input id="sellModalPrice" type="number" step="0.01" min="0" placeholder="0.00" required>
         <small class="hint" data-i18n-hint="sellPriceHint">Укажите цену, по которой продали предмет</small>
       </label>
       
       <label>
-        <span data-i18n="receivedAmount">💵 Сколько получил на руки *</span>
+        <span data-i18n="receivedAmount">💵 Получено на руки / шт *</span>
         <input id="sellModalReceived" type="number" step="0.01" min="0" placeholder="0.00" required>
         <small class="hint" data-i18n-hint="receivedHint">Фактическая сумма после продажи (обязательно)</small>
       </label>
@@ -242,9 +321,9 @@
 
   <!-- Модальное окно групповой продажи -->
   <div id="bulkSellModal" class="modal hidden">
-    <div class="modal-content" style="width: 400px;">
+    <div class="modal-content modal-wide">
       <h3 data-i18n="bulkSellTitle">💰 Групповая продажа</h3>
-      <div id="bulkSellInfo" style="margin: 10px 0; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px;"></div>
+      <div id="bulkSellInfo" class="bulk-sell-info"></div>
       
       <label>
         <span data-i18n="sellPrice">🏷️ Цена продажи за штуку</span>
@@ -258,7 +337,7 @@
         <small class="hint" data-i18n="bulkSellReceivedHint">Сколько получено за один предмет</small>
       </label>
       
-      <div class="fee-calculated" style="margin: 10px 0;">
+      <div class="fee-calculated">
         <div class="fee-row">
           <span data-i18n="bulkFeeCalculated">Комиссия с одной продажи:</span>
           <span id="bulkCalculatedFee">—</span>
@@ -290,71 +369,28 @@
 
   <!-- Модальное окно донатов -->
   <div id="donateModal" class="modal hidden">
-    <div class="modal-content" style="width: 400px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <h3 style="margin: 0;" data-i18n="donateTitle">❤️ Поддержать проект</h3>
-        <button class="close-btn" style="background: none; border: none; font-size: 20px; cursor: pointer; padding: 0 5px;">&times;</button>
+    <div class="modal-content modal-wide">
+      <div class="donate-modal-header">
+        <h3 data-i18n="donateTitle">❤️ Поддержать проект</h3>
+        <button class="close-btn">&times;</button>
       </div>
       
-      <p style="margin-bottom: 15px; color: var(--muted);" data-i18n="donateDescription">
+      <p class="donate-desc" data-i18n="donateDescription">
         Если расширение помогает вам в трейдинге, вы можете поддержать его развитие. Любая помощь приветствуется!
       </p>
       
-      <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
-        <!-- PayPal -->
-        <a href="https://www.paypal.com/donate/?hosted_button_id=YOUR_ID" 
-           target="_blank" 
-           class="donate-button" 
-           style="display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; text-decoration: none; color: var(--text);">
-          <span style="font-size: 24px;">💸</span>
-          <div style="flex: 1;">
+      <div class="donate-links">
+        <a href="https://www.paypal.com/donate/?hosted_button_id=GHVXVQJ4A3QYW" target="_blank" class="donate-button">
+          <span class="donate-icon">💸</span>
+          <div class="donate-btn-info">
             <strong data-i18n="donatePaypal">PayPal</strong>
-            <div style="font-size: 12px; color: var(--muted);" data-i18n="donatePaypalDesc">Быстрый перевод картой или со счёта</div>
+            <div class="donate-btn-desc" data-i18n="donatePaypalDesc">Быстрый перевод картой или со счёта</div>
           </div>
-          <span style="color: var(--muted);">→</span>
-        </a>
-        
-        <!-- Buymeacoffee -->
-        <a href="https://www.buymeacoffee.com/yourusername" 
-           target="_blank" 
-           class="donate-button" 
-           style="display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; text-decoration: none; color: var(--text);">
-          <span style="font-size: 24px;">☕</span>
-          <div style="flex: 1;">
-            <strong data-i18n="donateCoffee">Buy me a coffee</strong>
-            <div style="font-size: 12px; color: var(--muted);" data-i18n="donateCoffeeDesc">Разовое пожертвование</div>
-          </div>
-          <span style="color: var(--muted);">→</span>
-        </a>
-        
-        <!-- Patreon -->
-        <a href="https://www.patreon.com/yourusername" 
-           target="_blank" 
-           class="donate-button" 
-           style="display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; text-decoration: none; color: var(--text);">
-          <span style="font-size: 24px;">🎭</span>
-          <div style="flex: 1;">
-            <strong data-i18n="donatePatreon">Patreon</strong>
-            <div style="font-size: 12px; color: var(--muted);" data-i18n="donatePatreonDesc">Регулярная поддержка</div>
-          </div>
-          <span style="color: var(--muted);">→</span>
-        </a>
-        
-        <!-- Криптовалюта -->
-        <a href="#" 
-           onclick="alert('BTC: bc1q...\nETH: 0x...'); return false;" 
-           class="donate-button" 
-           style="display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; text-decoration: none; color: var(--text);">
-          <span style="font-size: 24px;">₿</span>
-          <div style="flex: 1;">
-            <strong data-i18n="donateCrypto">Криптовалюта</strong>
-            <div style="font-size: 12px; color: var(--muted);" data-i18n="donateCryptoDesc">BTC, ETH, USDT</div>
-          </div>
-          <span style="color: var(--muted);">→</span>
+          <span class="donate-arrow">→</span>
         </a>
       </div>
       
-      <p style="font-size: 11px; color: var(--muted); text-align: center;" data-i18n="donateThanks">
+      <p class="donate-thanks" data-i18n="donateThanks">
         Спасибо, что пользуетесь расширением! ❤️
       </p>
     </div>

@@ -29,19 +29,46 @@
       <div class="form-grid">
         <label>
           <span data-i18n="itemName">📦 Название предмета</span>
-          <input id="itemName" type="text" data-i18n-placeholder="itemPlaceholder" placeholder="Напр. Case Revolution" />
+          <div class="autocomplete-wrap">
+            <input id="itemName" type="text" data-i18n-placeholder="itemPlaceholder" placeholder="Напр. Case Revolution" autocomplete="off" />
+            <ul id="itemSuggestions" class="autocomplete-list hidden"></ul>
+          </div>
         </label>
 
         <label>
           <span data-i18n="buyPrice">💰 Цена покупки</span>
           <input id="buyPrice" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0.00" />
           <small class="hint" data-i18n-hint="buyPriceHint">Укажите 0 если предмет получен бесплатно</small>
+          <div id="priceAdvice" class="price-advice hidden">
+            <div class="price-advice-row breakeven">
+              <span class="price-advice-label" data-i18n="adviceBreakeven">⚠️ В ноль</span>
+              <span class="price-advice-value" id="adviceBreakeven">—</span>
+            </div>
+            <div class="price-advice-row target10">
+              <span class="price-advice-label">💚 +10%</span>
+              <span class="price-advice-value" id="adviceTarget10">—</span>
+            </div>
+            <div class="price-advice-row target25">
+              <span class="price-advice-label">💛 +25%</span>
+              <span class="price-advice-value" id="adviceTarget25">—</span>
+            </div>
+            <div class="price-advice-row target50">
+              <span class="price-advice-label">💙 +50%</span>
+              <span class="price-advice-value" id="adviceTarget50">—</span>
+            </div>
+          </div>
         </label>
 
         <label>
           <span data-i18n="quantity">🔢 Количество</span>
           <input id="itemQuantity" type="number" inputmode="numeric" step="1" min="1" value="1" placeholder="1" />
           <small class="hint" data-i18n-hint="quantityHint">Сколько предметов куплено</small>
+        </label>
+
+        <label>
+          <span data-i18n="tags">🏷️ Теги</span>
+          <input id="itemTags" type="text" data-i18n-placeholder="tagsPlaceholder" placeholder="cs2, knife, rare..." />
+          <small class="hint">Через запятую или пробел</small>
         </label>
 
         <label class="currency-label full-width">
@@ -76,7 +103,12 @@
         ❤️ Поддержать проект
       </button>
     </section>
-  </main>
+    </main>
+
+  <section class="container recent-deals-section">
+    <h3 class="recent-deals-title" data-i18n="recentDealsTitle">📋 Последние сделки</h3>
+    <div id="recentDealsPopup"></div>
+  </section>
 
   <!-- Модальное окно продажи -->
   <div id="sellModal" class="modal hidden">
@@ -127,57 +159,14 @@
         Если расширение помогает вам в трейдинге, вы можете поддержать его развитие. Любая помощь приветствуется!
       </p>
       
-      <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
-        <!-- PayPal -->
-        <a href="https://www.paypal.com/donate/?hosted_button_id=YOUR_ID" 
-           target="_blank" 
-           class="donate-button" 
-           style="display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; text-decoration: none; color: var(--text);">
-          <span style="font-size: 24px;">💸</span>
-          <div style="flex: 1;">
+      <div class="donate-links">
+        <a href="https://www.paypal.com/donate/?hosted_button_id=GHVXVQJ4A3QYW" target="_blank" class="donate-button">
+          <span class="donate-icon">💸</span>
+          <div class="donate-btn-info">
             <strong data-i18n="donatePaypal">PayPal</strong>
-            <div style="font-size: 12px; color: var(--muted);" data-i18n="donatePaypalDesc">Быстрый перевод картой или со счёта</div>
+            <div class="donate-btn-desc" data-i18n="donatePaypalDesc">Быстрый перевод картой или со счёта</div>
           </div>
-          <span style="color: var(--muted);">→</span>
-        </a>
-        
-        <!-- Buymeacoffee -->
-        <a href="https://www.buymeacoffee.com/yourusername" 
-           target="_blank" 
-           class="donate-button" 
-           style="display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; text-decoration: none; color: var(--text);">
-          <span style="font-size: 24px;">☕</span>
-          <div style="flex: 1;">
-            <strong data-i18n="donateCoffee">Buy me a coffee</strong>
-            <div style="font-size: 12px; color: var(--muted);" data-i18n="donateCoffeeDesc">Разовое пожертвование</div>
-          </div>
-          <span style="color: var(--muted);">→</span>
-        </a>
-        
-        <!-- Patreon -->
-        <a href="https://www.patreon.com/yourusername" 
-           target="_blank" 
-           class="donate-button" 
-           style="display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; text-decoration: none; color: var(--text);">
-          <span style="font-size: 24px;">🎭</span>
-          <div style="flex: 1;">
-            <strong data-i18n="donatePatreon">Patreon</strong>
-            <div style="font-size: 12px; color: var(--muted);" data-i18n="donatePatreonDesc">Регулярная поддержка</div>
-          </div>
-          <span style="color: var(--muted);">→</span>
-        </a>
-        
-        <!-- Криптовалюта -->
-        <a href="#" 
-           onclick="alert('BTC: bc1q...\nETH: 0x...'); return false;" 
-           class="donate-button" 
-           style="display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; text-decoration: none; color: var(--text);">
-          <span style="font-size: 24px;">₿</span>
-          <div style="flex: 1;">
-            <strong data-i18n="donateCrypto">Криптовалюта</strong>
-            <div style="font-size: 12px; color: var(--muted);" data-i18n="donateCryptoDesc">BTC, ETH, USDT</div>
-          </div>
-          <span style="color: var(--muted);">→</span>
+          <span class="donate-arrow">→</span>
         </a>
       </div>
       

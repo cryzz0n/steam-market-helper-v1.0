@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Steam Market Helper",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "Трекинг сделок Steam: расчёт прибыли, комиссии, маржи. Групповые продажи, заметки, графики, тёмная/светлая тема.",
   "action": {
     "default_title": "Steam Market Helper",

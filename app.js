@@ -40,17 +40,15 @@ const LANGUAGES = {
     // Общие
     appName: "Steam Market Helper",
     currency: "Валюта",
-    save: "Сохранить",
     cancel: "Отмена",
     delete: "Удалить",
-    close: "Закрыть",
-    
+
     // Тема
     theme: "Тема",
     themeLight: "Светлая",
     themeDark: "Тёмная",
     themeSystem: "Системная",
-    
+
     // Попап
     openHistory: "📜 Открыть историю",
     description: "Добавляй покупки, потом указывай сколько получил на руки — прибыль посчитается автоматически",
@@ -64,7 +62,7 @@ const LANGUAGES = {
     currencyHint: "Валюта влияет только на отображение",
     syncNote: "☁️ Настройки синхронизируются через Chrome. История хранится локально — для переноса используй экспорт/импорт JSON.",
     resetFields: "🔄 Сбросить поля",
-    
+
     // Модальное окно продажи
     sellTitle: "💰 Продажа предмета",
     sellPrice: "🏷️ Цена продажи",
@@ -75,7 +73,7 @@ const LANGUAGES = {
     feeAmount: "Сумма комиссии",
     feePercent: "Процент комиссии",
     confirmSell: "✅ Продать",
-    
+
     // Групповые операции
     bulkMode: "✅ Групповые операции",
     bulkModeExit: "❌ Выйти из группового режима",
@@ -85,18 +83,14 @@ const LANGUAGES = {
     bulkSell: "💰 Продать выбранные",
     bulkDelete: "🗑️ Удалить выбранные",
     bulkSellTitle: "💰 Групповая продажа",
-    bulkSellInfo: "сделок, предметов, общая стоимость",
     bulkSellPriceHint: "Цена продажи одного предмета",
     bulkSellReceivedHint: "Сколько получено за один предмет",
     bulkFeeCalculated: "Комиссия с одной продажи",
-    
+
     // Расширенный поиск
     searchInNotes: "🔍 В заметках",
-    searchInNotesHint: "Включить поиск по тексту заметок",
     dateFrom: "Дата с",
     dateTo: "Дата по",
-    datePlaceholder: "ГГГГ-ММ-ДД",
-    dateFilter: "Фильтр по датам",
     customRange: "Свой диапазон",
     priceFrom: "Цена от",
     priceTo: "Цена до",
@@ -106,15 +100,14 @@ const LANGUAGES = {
     priceProfit: "Прибыль",
     priceAll: "Все типы",
     priceRangeHint: "Фильтр по диапазону цен",
-    
+
     // История
     historyTitle: "📊 История сделок",
     exportJSON: "💾 Экспорт JSON",
     importJSON: "📂 Импорт JSON",
     wipeAll: "🗑️ Очистить всё",
-    
-    // Фильтры и поиск
-    search: "🔍 Поиск",
+
+    // Фильтры
     searchPlaceholder: "Поиск по предмету...",
     filterAll: "Все",
     filterOpen: "Куплено",
@@ -123,37 +116,35 @@ const LANGUAGES = {
     filterWeek: "Неделя",
     filterMonth: "Месяц",
     filterYear: "Год",
-    
+
     // Сортировка
     sortAsc: "▲",
     sortDesc: "▼",
-    
+
     // Заметки
     notes: "📝 Заметки",
     notesPlaceholder: "Добавить заметку...",
     notesSave: "Сохранить",
     notesCancel: "Отмена",
-    
+
     // Таблица
     date: "Дата",
     time: "Время",
     item: "Предмет",
-    quantity: "Кол-во",
-    buy: "Цена/шт",
     totalBuy: "Всего",
+    buy: "Цена/шт",
     sell: "Продажа/шт",
     received: "На руки/шт",
     fee: "Комиссия",
-    feePercentShort: "%",
     profit: "Прибыль",
     margin: "Маржа",
     status: "Статус",
     actions: "Действия",
-    
+
     // Статусы
     sold: "✅ Продано",
     bought: "⏳ Куплено",
-    
+
     // Статистика
     totalItems: "📦 Всего предметов:",
     totalInvested: "💰 Всего инвестиций:",
@@ -161,7 +152,7 @@ const LANGUAGES = {
     totalProfit: "📈 Общая прибыль:",
     avgMargin: "📊 Средняя маржа:",
     soldCount: "✅ Продано:",
-    
+
     // Графики
     charts: "📊 Графики и аналитика",
     profitChart: "🏆 Топ-10 прибыльных сделок",
@@ -172,8 +163,7 @@ const LANGUAGES = {
     lossMaking: "Убыточные",
     breakEven: "Безубыточные",
     profitable: "Прибыльные",
-    recentDeals: "Последние 20 сделок",
-    
+
     // Уведомления
     alertNoItem: "Укажи название предмета",
     alertNegativePrice: "Цена покупки не может быть отрицательной",
@@ -189,15 +179,11 @@ const LANGUAGES = {
     alertBulkDeleteSuccess: "✅ Удалено {count} сделок",
     confirmWipe: "Точно очистить историю?",
     confirmImport: "Импорт заменит текущую историю целиком. Продолжить?",
-    confirmDelete: "Удалить сделку?",
     confirmDeleteMessage: "Вы уверены, что хотите удалить эту сделку?",
-    
-    // Подсказки
-    hintFullHistory: "📊 Полная история открывается отдельной страницей",
-    
-    // Кнопки действий
+
+    // Кнопки
     sellAction: "💰 Продать",
-    
+
     // Донаты
     donate: "❤️ Поддержать проект",
     donateTitle: "❤️ Поддержать проект",
@@ -211,29 +197,65 @@ const LANGUAGES = {
     donateCrypto: "Криптовалюта",
     donateCryptoDesc: "BTC, ETH, USDT",
     donateThanks: "Спасибо, что пользуетесь расширением! ❤️",
-    
-    // Месяцы для статистики
+
+    // Сайдбар
+    sidebarHistory: "История",
+    sidebarCharts: "Графики",
+    sidebarDonate: "Донат",
+    sidebarCalculator: "Калькулятор",
+    sidebarHistoryTitle: "📊 История сделок",
+    sidebarChartsTitle: "📈 Графики и аналитика",
+
+    // Экспорт CSV
+    exportCSV: "📊 Экспорт CSV",
+
+    // Теги
+    tags: "🏷️ Теги",
+    tagsPlaceholder: "cs2, knife, rare...",
+    tagsFilterAll: "Все теги",
+    addTag: "Добавить тег",
+
+    // Редактирование
+    editTitle: "✏️ Редактировать сделку",
+    editSave: "💾 Сохранить",
+    editAction: "✏️",
+    dupTitle: "📋 Дублировать сделку",
+
+    // Undo удаления
+    undoDelete: "↩ Отменить",
+    deletedDeal: "Сделка удалена",
+
+    // Последние сделки в popup
+    recentDealsTitle: "📋 Последние сделки",
+    noRecentDeals: "Нет добавленных сделок",
+
+    // Рекомендация цены
+    adviceBreakeven: "⚠️ В ноль",
+
+    // Частичная продажа
+    sellQuantity: "🔢 Сколько продаёшь",
+    partialSellNote: "Остаток останется открытым",
+
+    // Месяцы
     months: {
       1: "Янв", 2: "Фев", 3: "Мар", 4: "Апр", 5: "Май", 6: "Июн",
       7: "Июл", 8: "Авг", 9: "Сен", 10: "Окт", 11: "Ноя", 12: "Дек"
     }
   },
-  
+
   en: {
     // Common
     appName: "Steam Market Helper",
     currency: "Currency",
-    save: "Save",
     cancel: "Cancel",
     delete: "Delete",
-    close: "Close",
-    
+
     // Theme
     theme: "Theme",
     themeLight: "Light",
     themeDark: "Dark",
     themeSystem: "System",
-    
+
     // Popup
     openHistory: "📜 Open History",
     description: "Add purchases, then enter how much you received — profit calculated automatically",
@@ -247,7 +269,7 @@ const LANGUAGES = {
     currencyHint: "Currency only affects display",
     syncNote: "☁️ Settings sync via Chrome. History stored locally — use JSON export/import for backup.",
     resetFields: "🔄 Reset Fields",
-    
+
     // Sell modal
     sellTitle: "💰 Sell Item",
     sellPrice: "🏷️ Sell Price",
@@ -258,7 +280,7 @@ const LANGUAGES = {
     feeAmount: "Fee amount",
     feePercent: "Fee percentage",
     confirmSell: "✅ Sell",
-    
+
     // Bulk operations
     bulkMode: "✅ Bulk operations",
     bulkModeExit: "❌ Exit bulk mode",
@@ -268,36 +290,30 @@ const LANGUAGES = {
     bulkSell: "💰 Sell selected",
     bulkDelete: "🗑️ Delete selected",
     bulkSellTitle: "💰 Bulk sell",
-    bulkSellInfo: "deals, items, total cost",
     bulkSellPriceHint: "Sell price per item",
     bulkSellReceivedHint: "Amount received per item",
     bulkFeeCalculated: "Fee per sale",
-    
+
     // Advanced search
     searchInNotes: "🔍 In notes",
-    searchInNotesHint: "Include notes in search",
     dateFrom: "Date from",
     dateTo: "Date to",
-    datePlaceholder: "YYYY-MM-DD",
-    dateFilter: "Date filter",
     customRange: "Custom range",
     priceFrom: "Price from",
     priceTo: "Price to",
-    priceType: "Price type",
     priceBuy: "Buy",
     priceSell: "Sell",
     priceProfit: "Profit",
     priceAll: "All types",
     priceRangeHint: "Filter by price range",
-    
+
     // History
     historyTitle: "📊 Trade History",
     exportJSON: "💾 Export JSON",
     importJSON: "📂 Import JSON",
     wipeAll: "🗑️ Clear All",
-    
-    // Filters and search
-    search: "🔍 Search",
+
+    // Filters
     searchPlaceholder: "Search by item...",
     filterAll: "All",
     filterOpen: "Bought",
@@ -306,37 +322,35 @@ const LANGUAGES = {
     filterWeek: "Week",
     filterMonth: "Month",
     filterYear: "Year",
-    
+
     // Sorting
     sortAsc: "▲",
     sortDesc: "▼",
-    
+
     // Notes
     notes: "📝 Notes",
     notesPlaceholder: "Add note...",
     notesSave: "Save",
     notesCancel: "Cancel",
-    
+
     // Table
     date: "Date",
     time: "Time",
     item: "Item",
-    quantity: "Qty",
-    buy: "Price/ea",
     totalBuy: "Total",
+    buy: "Price/ea",
     sell: "Sell/ea",
     received: "Received/ea",
     fee: "Fee",
-    feePercentShort: "%",
     profit: "Profit",
     margin: "Margin",
     status: "Status",
     actions: "Actions",
-    
+
     // Statuses
     sold: "✅ Sold",
     bought: "⏳ Bought",
-    
+
     // Statistics
     totalItems: "📦 Total items:",
     totalInvested: "💰 Total invested:",
@@ -344,7 +358,7 @@ const LANGUAGES = {
     totalProfit: "📈 Total profit:",
     avgMargin: "📊 Avg margin:",
     soldCount: "✅ Sold:",
-    
+
     // Charts
     charts: "📊 Charts & Analytics",
     profitChart: "🏆 Top 10 Profitable Deals",
@@ -355,9 +369,8 @@ const LANGUAGES = {
     lossMaking: "Loss Making",
     breakEven: "Break Even",
     profitable: "Profitable",
-    recentDeals: "Last 20 Deals",
-    
-    // Notifications
+
+    // Alerts
     alertNoItem: "Please enter item name",
     alertNegativePrice: "Buy price cannot be negative",
     alertInvalidQuantity: "Quantity must be greater than 0",
@@ -372,15 +385,11 @@ const LANGUAGES = {
     alertBulkDeleteSuccess: "✅ Deleted {count} deals",
     confirmWipe: "Clear history?",
     confirmImport: "Import will replace current history. Continue?",
-    confirmDelete: "Delete deal?",
     confirmDeleteMessage: "Are you sure you want to delete this deal?",
-    
-    // Hints
-    hintFullHistory: "📊 Full history opens in separate page",
-    
-    // Action buttons
+
+    // Buttons
     sellAction: "💰 Sell",
-    
+
     // Donate
     donate: "❤️ Support project",
     donateTitle: "❤️ Support project",
@@ -394,15 +403,52 @@ const LANGUAGES = {
     donateCrypto: "Cryptocurrency",
     donateCryptoDesc: "BTC, ETH, USDT",
     donateThanks: "Thank you for using the extension! ❤️",
-    
-    // Months for stats
+
+    // Sidebar
+    sidebarHistory: "History",
+    sidebarCharts: "Charts",
+    sidebarDonate: "Donate",
+    sidebarCalculator: "Calc",
+    sidebarHistoryTitle: "📊 Trade History",
+    sidebarChartsTitle: "📈 Charts & Analytics",
+
+    // Export CSV
+    exportCSV: "📊 Export CSV",
+
+    // Tags
+    tags: "🏷️ Tags",
+    tagsPlaceholder: "cs2, knife, rare...",
+    tagsFilterAll: "All tags",
+    addTag: "Add tag",
+
+    // Edit
+    editTitle: "✏️ Edit Deal",
+    editSave: "💾 Save",
+    editAction: "✏️",
+    dupTitle: "📋 Duplicate deal",
+
+    // Undo
+    undoDelete: "↩ Undo",
+    deletedDeal: "Deal deleted",
+
+    // Recent deals in popup
+    recentDealsTitle: "📋 Recent Deals",
+    noRecentDeals: "No deals added yet",
+
+    // Price advice
+    adviceBreakeven: "⚠️ Break even",
+
+    // Partial sell
+    sellQuantity: "🔢 Quantity to sell",
+    partialSellNote: "Remainder stays open",
+
+    // Months
     months: {
       1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
       7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"
     }
   }
 };
-
 const $ = (id) => document.getElementById(id);
 
 function toNum(v) {
@@ -534,16 +580,42 @@ function updateUILanguage() {
     document.title = t("appName") + " — " + (currentLanguage === "ru" ? "История" : "History");
   }
   
-  // Обновляем текст кнопки группового режима
+  // Кнопка группового режима
   const bulkBtn = $("bulkModeBtn");
   if (bulkBtn) {
     bulkBtn.textContent = state.bulkMode ? t("bulkModeExit") : t("bulkMode");
   }
-  
-  // Обновляем текст кнопки доната
-  const donateBtn = $("donateBtn");
-  if (donateBtn) {
-    donateBtn.textContent = t("donate");
+
+  // Кнопка доната в popup (нет сайдбара — просто текст)
+  const donateBtnPopup = $("donateBtn");
+  if (donateBtnPopup && !document.getElementById("labelDonate")) {
+    donateBtnPopup.textContent = t("donate");
+  }
+
+  // Подписи сайдбара — обновляем напрямую по id
+  const sidebarLabelMap = {
+    labelHistory:    "sidebarHistory",
+    labelCharts:     "sidebarCharts",
+    labelDonate:     "sidebarDonate",
+    labelCalculator: "sidebarCalculator",
+  };
+  for (const [elId, key] of Object.entries(sidebarLabelMap)) {
+    const el = document.getElementById(elId);
+    if (el) el.textContent = t(key);
+  }
+
+  // title на кнопках сайдбара
+  const sidebarHistoryBtn = $("sidebarHistoryBtn");
+  if (sidebarHistoryBtn) sidebarHistoryBtn.title = t("sidebarHistoryTitle");
+  const sidebarChartsBtn = $("sidebarChartsBtn");
+  if (sidebarChartsBtn) sidebarChartsBtn.title = t("sidebarChartsTitle");
+
+  // Подзаголовок топбара
+  const topbarSubtitle = $("topbarSubtitle");
+  if (topbarSubtitle) {
+    const activeBtn = document.querySelector(".sidebar-btn.active[data-section]");
+    const activeSection = activeBtn ? activeBtn.dataset.section : "history";
+    topbarSubtitle.textContent = t(activeSection === "charts" ? "sidebarChartsTitle" : "sidebarHistoryTitle");
   }
   
   setTimeout(() => {
@@ -647,15 +719,14 @@ const state = {
   rows: [],
   sellTargetId: null,
   notesTargetId: null,
+  editTargetId: null,
   bulkMode: false,
   selectedDeals: new Set(),
   bulkTargetIds: [],
   searchInNotes: false,
   dateFrom: null,
   dateTo: null,
-  priceFrom: null,
-  priceTo: null,
-  priceType: "all"
+  filterTag: "all"
 };
 
 // ---------- Migration from old localStorage keys ----------
@@ -717,22 +788,12 @@ async function saveHistory(rows) {
   await storageSet("local", { [STORAGE.local.history]: rows });
 }
 
-// ---------- UI: History overlay ----------
+// ---------- UI: History ----------
 function openHistory() {
   if (typeof chrome !== "undefined" && chrome.tabs && typeof chrome.tabs.create === "function") {
     const url = chrome.runtime.getURL("history.html");
     chrome.tabs.create({ url });
-    return;
   }
-  const overlay = $("historyOverlay");
-  if (!overlay) return;
-  overlay.classList.remove("hidden");
-}
-
-function closeHistory() {
-  const overlay = $("historyOverlay");
-  if (!overlay) return;
-  overlay.classList.add("hidden");
 }
 
 // ---------- UI: Custom currency dropdown ----------
@@ -812,7 +873,6 @@ function setupCurrencyUI() {
       closeNotesModal();
       closeBulkSellModal();
       closeDonateModal();
-      closeHistory();
     }
   });
 
@@ -825,6 +885,7 @@ function resetFields() {
   if ($("itemName")) $("itemName").value = "";
   if ($("buyPrice")) $("buyPrice").value = "";
   if ($("itemQuantity")) $("itemQuantity").value = "1";
+  if ($("itemTags")) $("itemTags").value = "";
 }
 
 async function addToHistory() {
@@ -870,6 +931,7 @@ async function addToHistory() {
 
   await saveHistory(rows);
   renderHistory();
+  renderRecentDealsPopup();
   resetFields();
 }
 
@@ -888,20 +950,36 @@ function openSellModal(id) {
   if (!r) return;
 
   state.sellTargetId = id;
-  const totalBuy = (r.buy || 0) * (r.quantity || 1);
-  $("sellItemLabel").textContent = `${r.item} x${r.quantity || 1} | ${t("buy")} ${money(r.buy, r.currency)}/шт | Всего: ${money(totalBuy, r.currency)}`;
+  const qty = r.quantity || 1;
+  const totalBuy = (r.buy || 0) * qty;
+
+  $("sellItemLabel").textContent = `${r.item} | ${t("buy")} ${money(r.buy, r.currency)}/шт | Всего: ${money(totalBuy, r.currency)}`;
+
+  // Поле количества
+  const qtyInput = $("sellModalQuantity");
+  if (qtyInput) {
+    qtyInput.value = qty;
+    qtyInput.max = qty;
+  }
+  const qtyMax = $("sellQtyMax");
+  if (qtyMax) qtyMax.textContent = `/ ${qty}`;
+
+  // Скрываем поле кол-ва если 1 штука
+  const qtyLabel = $("sellQuantityLabel");
+  if (qtyLabel) qtyLabel.style.display = qty > 1 ? "" : "none";
+
   $("sellModalPrice").value = "";
   $("sellModalReceived").value = "";
-  
+
   if ($("calculatedFeeAmount")) $("calculatedFeeAmount").textContent = "—";
   if ($("calculatedFeePercent")) $("calculatedFeePercent").textContent = "—";
 
   $("sellModal").classList.remove("hidden");
   $("sellModalPrice").focus();
-  
+
   $("sellModalPrice").addEventListener("input", updateCalculatedFee);
   $("sellModalReceived").addEventListener("input", updateCalculatedFee);
-  
+
   closeCurrencyMenu();
 }
 
@@ -943,42 +1021,56 @@ async function confirmSell() {
 
   const sellInput = toNum($("sellModalPrice").value);
   const sellerGets = toNum($("sellModalReceived").value);
-  
-  if (sellInput <= 0) {
-    alert(t("alertNoSellPrice"));
-    return;
-  }
-  
-  if (sellerGets <= 0) {
-    alert(t("alertNoReceived"));
-    return;
-  }
-  
-  if (sellerGets > sellInput) {
-    alert(t("alertReceivedGreaterThanSell"));
-    return;
-  }
+
+  if (sellInput <= 0) { alert(t("alertNoSellPrice")); return; }
+  if (sellerGets <= 0) { alert(t("alertNoReceived")); return; }
+  if (sellerGets > sellInput) { alert(t("alertReceivedGreaterThanSell")); return; }
 
   const idx = state.rows.findIndex((x) => x.id === state.sellTargetId);
   if (idx < 0) return;
   const r = state.rows[idx];
 
+  const totalQty = r.quantity || 1;
+  const sellQty = Math.min(Math.max(1, Math.floor(toNum($("sellModalQuantity")?.value) || totalQty)), totalQty);
+
   const { profit, margin } = calculateFromSellerGets(r.buy, sellerGets);
-  
   const feeAmount = round2(sellInput - sellerGets);
   const feePercent = round2((feeAmount / sellInput) * 100);
 
   const rows = [...state.rows];
-  rows[idx] = {
-    ...r,
-    sell: sellInput,
-    sellerGets: sellerGets,
-    feeAmount: feeAmount,
-    feePercent: feePercent,
-    profit: profit,
-    margin: margin,
-    status: "sold"
-  };
+
+  if (sellQty >= totalQty) {
+    // Продаём всё — обычное поведение
+    rows[idx] = {
+      ...r,
+      sell: sellInput, sellerGets, feeAmount, feePercent,
+      profit, margin, status: "sold"
+    };
+  } else {
+    // Частичная продажа — разбиваем запись на две
+    const { date, time } = nowParts();
+
+    // Проданная часть — новая запись
+    const soldEntry = {
+      ...r,
+      id: uid(), date, time,
+      quantity: sellQty,
+      sell: sellInput, sellerGets, feeAmount, feePercent,
+      profit, margin, status: "sold"
+    };
+
+    // Остаток — уменьшаем количество, статус остаётся open
+    rows[idx] = {
+      ...r,
+      quantity: totalQty - sellQty,
+      sell: null, sellerGets: null, feeAmount: null,
+      feePercent: null, profit: null, margin: null,
+      status: "open"
+    };
+
+    // Вставляем проданную запись сразу после оставшейся
+    rows.splice(idx + 1, 0, soldEntry);
+  }
 
   await saveHistory(rows);
   closeSellModal();
@@ -1261,34 +1353,11 @@ function filterRows(rows) {
       }
     }
     
-    // Фильтр по цене
-    if (state.priceFrom !== null || state.priceTo !== null) {
-      let value = null;
-      switch (state.priceType) {
-        case "buy":
-          value = r.buy || 0;
-          break;
-        case "sell":
-          value = r.sell || 0;
-          break;
-        case "profit":
-          value = (r.profit || 0) * (r.quantity || 1);
-          break;
-        default:
-          const buy = r.buy || 0;
-          const sell = r.sell || 0;
-          const matchesBuy = state.priceFrom === null || buy >= state.priceFrom;
-          const matchesSell = state.priceTo === null || sell <= state.priceTo;
-          if (!matchesBuy || !matchesSell) return false;
-          break;
-      }
-      
-      if (value !== null) {
-        if (state.priceFrom !== null && value < state.priceFrom) return false;
-        if (state.priceTo !== null && value > state.priceTo) return false;
-      }
+    // Фильтр по тегу
+    if (state.filterTag && state.filterTag !== "all") {
+      if (!Array.isArray(r.tags) || !r.tags.includes(state.filterTag)) return false;
     }
-    
+
     // Поиск по тексту
     if (searchQuery) {
       const itemMatch = r.item.toLowerCase().includes(searchQuery.toLowerCase());
@@ -1307,10 +1376,6 @@ function setupFilterUI() {
   const searchInNotesCheckbox = $("searchInNotes");
   const dateFromInput = $("dateFrom");
   const dateToInput = $("dateTo");
-  const priceFromInput = $("priceFrom");
-  const priceToInput = $("priceTo");
-  const priceTypeSelect = $("priceType");
-  
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
       searchQuery = e.target.value;
@@ -1360,23 +1425,10 @@ function setupFilterUI() {
     });
   }
   
-  if (priceFromInput) {
-    priceFromInput.addEventListener("input", (e) => {
-      state.priceFrom = e.target.value ? toNum(e.target.value) : null;
-      renderHistory();
-    });
-  }
-  
-  if (priceToInput) {
-    priceToInput.addEventListener("input", (e) => {
-      state.priceTo = e.target.value ? toNum(e.target.value) : null;
-      renderHistory();
-    });
-  }
-  
-  if (priceTypeSelect) {
-    priceTypeSelect.addEventListener("change", (e) => {
-      state.priceType = e.target.value;
+  const filterTagSelect = document.getElementById("filterTag");
+  if (filterTagSelect) {
+    filterTagSelect.addEventListener("change", (e) => {
+      state.filterTag = e.target.value;
       renderHistory();
     });
   }
@@ -1469,61 +1521,381 @@ function updateSortIndicators() {
 // ---------- Горячие клавиши ----------
 function setupHotkeys() {
   document.addEventListener("keydown", (e) => {
+    // Escape — закрываем любую открытую модалку
+    if (e.key === "Escape") {
+      if ($("sellModal") && !$("sellModal").classList.contains("hidden"))       { closeSellModal();     return; }
+      if ($("editModal") && !$("editModal").classList.contains("hidden"))       { closeEditModal();     return; }
+      if ($("notesModal") && !$("notesModal").classList.contains("hidden"))     { closeNotesModal();    return; }
+      if ($("donateModal") && !$("donateModal").classList.contains("hidden"))   { closeDonateModal();   return; }
+      if ($("bulkSellModal") && !$("bulkSellModal").classList.contains("hidden")) { closeBulkSellModal(); return; }
+    }
+
+    // Не реагируем если фокус в поле ввода
     if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
-    
-    switch (e.key) {
-      case "n":
-      case "N":
+
+    // Используем e.code — работает независимо от раскладки клавиатуры
+    switch (e.code) {
+      case "KeyN":
         if ($("itemName") && $("buyPrice")) {
           $("itemName").focus();
         }
         break;
-        
-      case "h":
-      case "H":
-        openHistory();
+
+      case "KeyH":
+        // В popup — открываем историю, на странице истории — фокус в поиск
+        if ($("searchInput")) {
+          $("searchInput").focus();
+          e.preventDefault();
+        } else {
+          openHistory();
+        }
         break;
-        
-      case "s":
-      case "S":
+
+      case "KeyS":
         if ($("searchInput")) {
           $("searchInput").focus();
           e.preventDefault();
         }
         break;
-        
-      case "b":
-      case "B":
+
+      case "KeyB":
         if ($("bulkModeBtn")) {
           toggleBulkMode();
         }
         break;
     }
   });
-  
+
+  // Enter в поле покупки — добавить сделку
   $("buyPrice")?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      addToHistory();
-    }
+    if (e.key === "Enter") addToHistory();
   });
-  
+
+  // Ctrl+Enter в модалке продажи — подтвердить
   $("sellModalPrice")?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && e.ctrlKey) {
-      confirmSell();
-    }
+    if (e.key === "Enter" && e.ctrlKey) confirmSell();
   });
 }
 
-// ---------- Подтверждение удаления ----------
+// ---------- Undo удаления ----------
+let undoTimer = null;
+let pendingDeleteId = null;
+let pendingDeleteRows = null;
+
 function showDeleteConfirm(id) {
-  if (confirm(t("confirmDeleteMessage"))) {
-    const rows = state.rows.filter((x) => x.id !== id);
-    saveHistory(rows);
-    renderHistory();
+  // Сохраняем состояние для undo
+  pendingDeleteId = id;
+  pendingDeleteRows = [...state.rows];
+
+  // Удаляем сразу
+  const rows = state.rows.filter((x) => x.id !== id);
+  saveHistory(rows);
+  renderHistory();
+
+  // Показываем тост с кнопкой отмены
+  showUndoToast();
+}
+
+function showUndoToast() {
+  // Убираем предыдущий тост если есть
+  const existing = document.getElementById("undoToast");
+  if (existing) existing.remove();
+  if (undoTimer) clearTimeout(undoTimer);
+
+  const toast = document.createElement("div");
+  toast.id = "undoToast";
+  toast.className = "undo-toast";
+  toast.innerHTML = `
+    <span class="undo-toast-text">${t("deletedDeal")}</span>
+    <button class="undo-toast-btn" id="undoDeleteBtn">${t("undoDelete")}</button>
+    <div class="undo-toast-progress"></div>
+  `;
+  document.body.appendChild(toast);
+
+  // Анимация появления
+  requestAnimationFrame(() => toast.classList.add("undo-toast-visible"));
+
+  document.getElementById("undoDeleteBtn").addEventListener("click", () => {
+    if (pendingDeleteRows) {
+      saveHistory(pendingDeleteRows);
+      renderHistory();
+    }
+    dismissUndoToast();
+  });
+
+  undoTimer = setTimeout(dismissUndoToast, 5000);
+}
+
+function dismissUndoToast() {
+  if (undoTimer) { clearTimeout(undoTimer); undoTimer = null; }
+  pendingDeleteId = null;
+  pendingDeleteRows = null;
+  const toast = document.getElementById("undoToast");
+  if (toast) {
+    toast.classList.remove("undo-toast-visible");
+    setTimeout(() => toast.remove(), 300);
   }
 }
 
-// ---------- Донаты ----------
+
+
+// ---------- Рекомендация цены продажи ----------
+// Steam комиссия: 13% (10% Steam + 3% разработчик)
+const STEAM_FEE = 0.13;
+
+function calcMinSellPrice(buyPrice, targetProfitPct = 0) {
+  // Чтобы получить buyPrice * (1 + targetProfitPct/100) на руки,
+  // нужно выставить: желаемое_на_руки / (1 - STEAM_FEE)
+  const wantOnHand = buyPrice * (1 + targetProfitPct / 100);
+  return round2(wantOnHand / (1 - STEAM_FEE));
+}
+
+function updatePriceAdvice() {
+  const adviceBox = document.getElementById("priceAdvice");
+  if (!adviceBox) return;
+
+  const buy = toNum(document.getElementById("buyPrice")?.value);
+
+  if (!buy || buy <= 0) {
+    adviceBox.classList.add("hidden");
+    return;
+  }
+
+  adviceBox.classList.remove("hidden");
+
+  const cur = $("currency")?.value || state.currency;
+  const values = {
+    adviceBreakeven: calcMinSellPrice(buy, 0),
+    adviceTarget10:  calcMinSellPrice(buy, 10),
+    adviceTarget25:  calcMinSellPrice(buy, 25),
+    adviceTarget50:  calcMinSellPrice(buy, 50),
+  };
+
+  for (const [id, val] of Object.entries(values)) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    el.textContent = money(val, cur);
+    el.title = "Нажми чтобы скопировать";
+    el.onclick = () => {
+      navigator.clipboard?.writeText(String(val)).catch(() => {});
+      el.textContent = "✓ Скопировано";
+      setTimeout(() => { el.textContent = money(val, cur); }, 1200);
+    };
+  }
+}
+
+
+function getAllTags() {
+  const tags = new Set();
+  state.rows.forEach(r => (r.tags || []).forEach(tag => tags.add(tag)));
+  return [...tags].sort();
+}
+
+function updateTagFilterUI() {
+  const select = document.getElementById("filterTag");
+  if (!select) return;
+  const current = state.filterTag;
+  const tags = getAllTags();
+  select.innerHTML = `<option value="all">${t("tagsFilterAll")}</option>`;
+  tags.forEach(tag => {
+    const opt = document.createElement("option");
+    opt.value = tag;
+    opt.textContent = `🏷️ ${tag}`;
+    if (tag === current) opt.selected = true;
+    select.appendChild(opt);
+  });
+  if (current !== "all") select.value = current;
+}
+
+function parseTagsInput(val) {
+  return val.split(/[,;\s]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
+}
+
+// ---------- Редактирование сделок ----------
+function openEditModal(id) {
+  const r = state.rows.find(x => x.id === id);
+  if (!r) return;
+  state.editTargetId = id;
+
+  document.getElementById("editItemName").value = r.item || "";
+  document.getElementById("editBuyPrice").value = r.buy ?? "";
+  document.getElementById("editQuantity").value = r.quantity || 1;
+  document.getElementById("editTags").value = (r.tags || []).join(", ");
+  document.getElementById("editNotes").value = r.notes || "";
+
+  document.getElementById("editModal").classList.remove("hidden");
+  document.getElementById("editItemName").focus();
+}
+
+function closeEditModal() {
+  state.editTargetId = null;
+  document.getElementById("editModal").classList.add("hidden");
+}
+
+async function confirmEdit() {
+  if (!state.editTargetId) return;
+  const idx = state.rows.findIndex(x => x.id === state.editTargetId);
+  if (idx < 0) return;
+
+  const item = document.getElementById("editItemName").value.trim();
+  if (!item) { alert(t("alertNoItem")); return; }
+
+  const buy = toNum(document.getElementById("editBuyPrice").value);
+  if (buy < 0) { alert(t("alertNegativePrice")); return; }
+
+  const quantity = toNum(document.getElementById("editQuantity").value) || 1;
+  if (quantity < 1) { alert(t("alertInvalidQuantity")); return; }
+
+  const tags = parseTagsInput(document.getElementById("editTags").value);
+  const notes = document.getElementById("editNotes").value.trim();
+
+  const rows = [...state.rows];
+  const old = rows[idx];
+
+  // Пересчитываем прибыль если изменилась цена покупки и сделка закрыта
+  let profit = old.profit;
+  let margin = old.margin;
+  if (old.status === "sold" && old.sellerGets != null && buy !== old.buy) {
+    const result = calculateFromSellerGets(buy, old.sellerGets);
+    profit = result.profit;
+    margin = result.margin;
+  }
+
+  rows[idx] = { ...old, item, buy, quantity, tags, notes, profit, margin };
+  await saveHistory(rows);
+  closeEditModal();
+  renderHistory();
+}
+
+// ---------- Дублирование сделки ----------
+async function duplicateDeal(id) {
+  const r = state.rows.find(x => x.id === id);
+  if (!r) return;
+
+  const { date, time } = nowParts();
+  const copy = {
+    ...r,
+    id: uid(), date, time,
+    sell: null, sellerGets: null, feeAmount: null,
+    feePercent: null, profit: null, margin: null,
+    status: "open"
+  };
+
+  const rows = [...state.rows];
+  // Вставляем копию сразу после оригинала
+  const idx = rows.findIndex(x => x.id === id);
+  rows.splice(idx + 1, 0, copy);
+
+  await saveHistory(rows);
+  renderHistory();
+  renderRecentDealsPopup();
+}
+
+// ---------- Автодополнение названий ----------
+function setupAutocomplete() {
+  const input = $("itemName");
+  const list = document.getElementById("itemSuggestions");
+  if (!input || !list) return;
+
+  let activeIdx = -1;
+
+  input.addEventListener("input", () => {
+    const q = input.value.trim().toLowerCase();
+    if (!q) { hideList(); return; }
+
+    // Уникальные названия из истории, отсортированные по частоте
+    const freq = {};
+    state.rows.forEach(r => {
+      const name = r.item || "";
+      if (name.toLowerCase().includes(q)) freq[name] = (freq[name] || 0) + 1;
+    });
+
+    const matches = Object.entries(freq)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 7)
+      .map(([name]) => name);
+
+    if (!matches.length) { hideList(); return; }
+
+    activeIdx = -1;
+    list.innerHTML = matches.map((name, i) =>
+      `<li class="autocomplete-item" data-idx="${i}">${highlightText(name, input.value.trim())}</li>`
+    ).join("");
+    list.classList.remove("hidden");
+
+    list.querySelectorAll(".autocomplete-item").forEach(li => {
+      li.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        input.value = matches[parseInt(li.dataset.idx)];
+        hideList();
+        updatePriceAdvice();
+        document.getElementById("buyPrice")?.focus();
+      });
+    });
+  });
+
+  input.addEventListener("keydown", (e) => {
+    const items = list.querySelectorAll(".autocomplete-item");
+    if (!items.length || list.classList.contains("hidden")) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      activeIdx = Math.min(activeIdx + 1, items.length - 1);
+      updateActive(items);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      activeIdx = Math.max(activeIdx - 1, 0);
+      updateActive(items);
+    } else if (e.key === "Enter" && activeIdx >= 0) {
+      e.preventDefault();
+      input.value = items[activeIdx].textContent;
+      hideList();
+      document.getElementById("buyPrice")?.focus();
+    } else if (e.key === "Escape") {
+      hideList();
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!input.contains(e.target) && !list.contains(e.target)) hideList();
+  });
+
+  function hideList() {
+    list.classList.add("hidden");
+    activeIdx = -1;
+  }
+
+  function updateActive(items) {
+    items.forEach((li, i) => li.classList.toggle("active", i === activeIdx));
+    if (activeIdx >= 0) items[activeIdx].scrollIntoView({ block: "nearest" });
+  }
+}
+
+// ---------- Боковое меню ----------
+function initSidebar() {
+  document.querySelectorAll(".sidebar-btn[data-section]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const section = btn.dataset.section;
+
+      document.querySelectorAll(".sidebar-btn[data-section]").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      document.querySelectorAll(".content-section").forEach((s) => s.classList.remove("active-section"));
+      const target = document.getElementById("section" + section.charAt(0).toUpperCase() + section.slice(1));
+      if (target) target.classList.add("active-section");
+
+      const sub = document.getElementById("topbarSubtitle");
+      if (sub) sub.textContent = t(section === "charts" ? "sidebarChartsTitle" : "sidebarHistoryTitle");
+
+      if (section === "charts") {
+        setTimeout(() => { updateCharts(); }, 150);
+      }
+    });
+  });
+
+}
+
+
 function openDonateModal() {
   const modal = document.getElementById('donateModal');
   if (modal) {
@@ -2155,9 +2527,22 @@ function renderHistory() {
 
     tr.appendChild(td(r.status === "sold" ? t("sold") : t("bought")));
 
+    // Теги в строке таблицы (перед действиями)
+    const tagsTd = document.createElement("td");
+    if (r.tags && r.tags.length) {
+      r.tags.forEach(tag => {
+        const chip = document.createElement("span");
+        chip.className = "tag-chip";
+        chip.textContent = tag;
+        chip.dataset.action = "filterTag";
+        chip.dataset.tag = tag;
+        tagsTd.appendChild(chip);
+      });
+    }
+    tr.appendChild(tagsTd);
+
     const actions = document.createElement("td");
-    actions.style.display = "flex";
-    actions.style.gap = "4px";
+    actions.className = "actions-td";
 
     if (!state.bulkMode) {
       if (r.status === "open") {
@@ -2169,15 +2554,29 @@ function renderHistory() {
         actions.appendChild(sellBtn);
       }
 
+      const editBtn = document.createElement("button");
+      editBtn.type = "button";
+      editBtn.textContent = t("editAction");
+      editBtn.dataset.action = "edit";
+      editBtn.dataset.id = r.id;
+      editBtn.title = t("editTitle");
+      actions.appendChild(editBtn);
+
+      const dupBtn = document.createElement("button");
+      dupBtn.type = "button";
+      dupBtn.textContent = "📋";
+      dupBtn.dataset.action = "dup";
+      dupBtn.dataset.id = r.id;
+      dupBtn.title = t("dupTitle");
+      actions.appendChild(dupBtn);
+
       const notesBtn = document.createElement("button");
       notesBtn.type = "button";
-      
       if (r.notes) {
         notesBtn.innerHTML = "📝";
         if (searchQuery && state.searchInNotes && r.notes.toLowerCase().includes(searchQuery.toLowerCase())) {
-          const highlightedNotes = highlightText(r.notes, searchQuery);
           notesBtn.title = `Найдено в заметках: ${r.notes.substring(0, 50)}...`;
-          notesBtn.classList.add('has-match');
+          notesBtn.classList.add("has-match");
         } else {
           notesBtn.title = r.notes || t("notes");
         }
@@ -2185,7 +2584,6 @@ function renderHistory() {
         notesBtn.innerHTML = "📄";
         notesBtn.title = t("notes");
       }
-      
       notesBtn.dataset.action = "notes";
       notesBtn.dataset.id = r.id;
       actions.appendChild(notesBtn);
@@ -2205,6 +2603,8 @@ function renderHistory() {
   
   updateStats();
   updateSortIndicators();
+  updateTagFilterUI();
+  renderRecentDealsPopup();
   
   setTimeout(() => {
     updateCharts();
@@ -2226,15 +2626,57 @@ function setupHistoryTableActions() {
 
     if (action === "sell") {
       openSellModal(id);
+    } else if (action === "edit") {
+      openEditModal(id);
+    } else if (action === "dup") {
+      duplicateDeal(id);
     } else if (action === "notes") {
       openNotesModal(id);
     } else if (action === "del") {
       showDeleteConfirm(id);
+    } else if (action === "filterTag") {
+      const tag = t.dataset.tag;
+      if (tag) {
+        state.filterTag = tag;
+        updateTagFilterUI();
+        renderHistory();
+      }
     }
   });
 }
 
 // ---------- JSON Export/Import ----------
+// ---------- Последние сделки в popup ----------
+function renderRecentDealsPopup() {
+  const container = document.getElementById("recentDealsPopup");
+  if (!container) return;
+
+  const recent = [...state.rows].slice(0, 5);
+  if (!recent.length) {
+    container.innerHTML = `<p class="recent-empty">${t("noRecentDeals")}</p>`;
+    return;
+  }
+
+  container.innerHTML = recent.map(r => {
+    const statusClass = r.status === "sold" ? "recent-sold" : "recent-open";
+    const profitText = r.profit != null
+      ? money(r.profit * (r.quantity || 1), r.currency)
+      : "—";
+    const profitClass = r.profit > 0 ? "profit-pos" : r.profit < 0 ? "profit-neg" : "";
+    const tagsHtml = (r.tags || []).map(tag =>
+      `<span class="tag-chip tag-chip-sm">${tag}</span>`).join("");
+    return `
+      <div class="recent-row ${statusClass}">
+        <div class="recent-item">${r.item}${tagsHtml ? `<span class="recent-tags">${tagsHtml}</span>` : ""}</div>
+        <div class="recent-meta">
+          <span>${money(r.buy || 0, r.currency)}</span>
+          <span class="${profitClass}">${profitText}</span>
+          <span class="recent-status">${r.status === "sold" ? "✅" : "⏳"}</span>
+        </div>
+      </div>`;
+  }).join("");
+}
+
 function exportJSON() {
   const payload = {
     app: APP,
@@ -2254,6 +2696,47 @@ function exportJSON() {
   a.href = url;
   const stamp = new Date().toISOString().slice(0,10);
   a.download = `steam-market-helper_backup_v${VERSION}_${stamp}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function exportCSV() {
+  const headers = [
+    "date", "time", "item", "quantity",
+    "buy", "totalBuy", "sell", "received",
+    "feeAmount", "feePercent", "profit", "margin",
+    "status", "currency", "tags", "notes"
+  ];
+
+  const escape = (val) => {
+    const s = String(val ?? "");
+    return s.includes(",") || s.includes('"') || s.includes("\n")
+      ? `"${s.replace(/"/g, '""')}"` : s;
+  };
+
+  const rows = [headers.join(",")];
+  for (const r of state.rows) {
+    const qty = r.quantity || 1;
+    rows.push([
+      r.date, r.time, r.item, qty,
+      r.buy ?? "", round2((r.buy || 0) * qty),
+      r.sell ?? "", r.sellerGets ?? "",
+      r.feeAmount ?? "", r.feePercent ?? "",
+      r.profit != null ? round2(r.profit * qty) : "",
+      r.margin ?? "",
+      r.status, r.currency || state.currency,
+      (r.tags || []).join("|"),
+      r.notes || ""
+    ].map(escape).join(","));
+  }
+
+  const blob = new Blob(["\uFEFF" + rows.join("\n")], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `steam-market-helper_${new Date().toISOString().slice(0, 10)}.csv`;
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -2353,13 +2836,15 @@ async function init() {
   setupHotkeys();
   setupHistoryTableActions();
   setupDonateModal();
+  setupAutocomplete();
+  initSidebar();
   updateUILanguage();
 
   $("addBtn")?.addEventListener("click", addToHistory);
   $("clearBtn")?.addEventListener("click", resetFields);
+  $("buyPrice")?.addEventListener("input", updatePriceAdvice);
 
   $("toggleHistoryBtn")?.addEventListener("click", openHistory);
-  $("closeHistoryBtn")?.addEventListener("click", closeHistory);
   $("openPopupHint")?.addEventListener("click", () => {
     if (currentLanguage === "ru") {
       alert("Открой калькулятор, нажав на иконку расширения в панели Chrome.");
@@ -2369,7 +2854,11 @@ async function init() {
   });
 
   $("exportJsonBtn")?.addEventListener("click", exportJSON);
+  $("exportCsvBtn")?.addEventListener("click", exportCSV);
   $("importJsonFile")?.addEventListener("change", importJSONFile);
+
+  $("editSave")?.addEventListener("click", confirmEdit);
+  $("editCancel")?.addEventListener("click", closeEditModal);
 
   $("wipeHistoryBtn")?.addEventListener("click", async () => {
     if (!confirm(t("confirmWipe"))) return;
@@ -2406,6 +2895,7 @@ async function init() {
   });
 
   renderHistory();
+  renderRecentDealsPopup();
   
   setTimeout(() => {
     updateCharts();
