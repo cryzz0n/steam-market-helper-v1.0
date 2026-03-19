@@ -66,7 +66,7 @@
 ## 🚀 **Установка**
 
 ### Из Chrome Web Store
-1. Перейдите на [страницу расширения](https://chromewebstore.google.com/detail/steam-market-helper/pmcknffccjjjacpjlpnkpodgbdnmojej?authuser=0&hl=ru) (скоро)
+1. Перейдите на [страницу расширения](https://chromewebstore.google.com/detail/steam-market-helper/pmcknffccjjjacpjlpnkpodgbdnmojej?authuser=0&hl=ru)
 2. Нажмите "Установить"
 
 ### Вручную (для разработки)
