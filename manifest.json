@@ -1,13 +1,11 @@
 {
   "manifest_version": 3,
   "name": "Steam Market Helper",
-  "version": "1.0.4",
-  "description": "Трекинг сделок Steam: расчёт прибыли, комиссии, маржи. Групповые продажи, заметки, графики, тёмная/светлая тема.",
+  "version": "1.0.5",
+  "description": "Steam trade tracking: profit, fee, and margin calculations. Bulk selling, notes, charts, and dark/light theme.",
   "action": {
     "default_title": "Steam Market Helper",
-    "default_popup": "popup.html",
-    "default_width": 700,
-    "default_height": 650
+    "default_popup": "popup.html"
   },
   "permissions": [
     "storage"

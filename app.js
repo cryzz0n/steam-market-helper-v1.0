@@ -17,7 +17,7 @@
 // - Кнопка поддержки (донаты)
 
 const APP = "steam-market-helper";
-const VERSION = "1.8.0";
+const VERSION = "1.3.2";
 
 const STORAGE = {
   sync: {
@@ -200,6 +200,7 @@ const LANGUAGES = {
 
     // Сайдбар
     sidebarHistory: "История",
+    sidebarRateUs: "Rate Us",
     sidebarCharts: "Графики",
     sidebarDonate: "Донат",
     sidebarCalculator: "Калькулятор",
@@ -406,6 +407,7 @@ const LANGUAGES = {
 
     // Sidebar
     sidebarHistory: "History",
+    sidebarRateUs: "Rate Us",
     sidebarCharts: "Charts",
     sidebarDonate: "Donate",
     sidebarCalculator: "Calc",
@@ -597,6 +599,7 @@ function updateUILanguage() {
     labelHistory:    "sidebarHistory",
     labelCharts:     "sidebarCharts",
     labelDonate:     "sidebarDonate",
+    labelRateUs:     "sidebarRateUs",
     labelCalculator: "sidebarCalculator",
   };
   for (const [elId, key] of Object.entries(sidebarLabelMap)) {
@@ -726,7 +729,9 @@ const state = {
   searchInNotes: false,
   dateFrom: null,
   dateTo: null,
-  filterTag: "all"
+  filterTag: "all",
+  currentPage: 1,
+  pageSize: 10
 };
 
 // ---------- Migration from old localStorage keys ----------
@@ -790,10 +795,8 @@ async function saveHistory(rows) {
 
 // ---------- UI: History ----------
 function openHistory() {
-  if (typeof chrome !== "undefined" && chrome.tabs && typeof chrome.tabs.create === "function") {
-    const url = chrome.runtime.getURL("history.html");
-    chrome.tabs.create({ url });
-  }
+  const url = chrome.runtime?.getURL("history.html") || "history.html";
+  window.open(url, "_blank");
 }
 
 // ---------- UI: Custom currency dropdown ----------
@@ -893,46 +896,27 @@ async function addToHistory() {
   const buy = toNum($("buyPrice")?.value);
   const quantity = toNum($("itemQuantity")?.value) || 1;
   const currency = $("currency")?.value || state.currency;
+  const tags = parseTagsInput($("itemTags")?.value || "");
 
-  if (!item) {
-    alert(t("alertNoItem"));
-    return;
-  }
-  
-  if (buy < 0) {
-    alert(t("alertNegativePrice"));
-    return;
-  }
-  
-  if (quantity < 1) {
-    alert(t("alertInvalidQuantity"));
-    return;
-  }
+  if (!item) { alert(t("alertNoItem")); return; }
+  if (buy < 0) { alert(t("alertNegativePrice")); return; }
+  if (quantity < 1) { alert(t("alertInvalidQuantity")); return; }
 
   const { date, time } = nowParts();
   const rows = [...state.rows];
   rows.unshift({
-    id: uid(),
-    date,
-    time,
-    item,
-    buy,
-    quantity,
-    sell: null,
-    sellerGets: null,
-    feeAmount: null,
-    feePercent: null,
-    profit: null,
-    margin: null,
-    status: "open",
-    currency,
-    notes: ""
+    id: uid(), date, time, item, buy, quantity, tags,
+    sell: null, sellerGets: null, feeAmount: null,
+    feePercent: null, profit: null, margin: null,
+    status: "open", currency, notes: ""
   });
 
   await saveHistory(rows);
   renderHistory();
   renderRecentDealsPopup();
+  notifyHistoryUpdated();
   resetFields();
+  maybeShowRateUs();
 }
 
 function calculateFromSellerGets(buy, sellerGets) {
@@ -1369,6 +1353,8 @@ function filterRows(rows) {
   });
 }
 
+function resetPage() { state.currentPage = 1; }
+
 function setupFilterUI() {
   const searchInput = $("searchInput");
   const filterStatusSelect = $("filterStatus");
@@ -1379,14 +1365,14 @@ function setupFilterUI() {
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
       searchQuery = e.target.value;
-      renderHistory();
+      resetPage(); renderHistory();
     });
   }
   
   if (filterStatusSelect) {
     filterStatusSelect.addEventListener("change", (e) => {
       filterStatus = e.target.value;
-      renderHistory();
+      resetPage(); renderHistory();
     });
   }
   
@@ -1400,28 +1386,28 @@ function setupFilterUI() {
         state.dateFrom = null;
         state.dateTo = null;
       }
-      renderHistory();
+      resetPage(); renderHistory();
     });
   }
   
   if (searchInNotesCheckbox) {
     searchInNotesCheckbox.addEventListener("change", (e) => {
       state.searchInNotes = e.target.checked;
-      renderHistory();
+      resetPage(); renderHistory();
     });
   }
   
   if (dateFromInput) {
     dateFromInput.addEventListener("change", (e) => {
       state.dateFrom = e.target.value;
-      renderHistory();
+      resetPage(); renderHistory();
     });
   }
   
   if (dateToInput) {
     dateToInput.addEventListener("change", (e) => {
       state.dateTo = e.target.value;
-      renderHistory();
+      resetPage(); renderHistory();
     });
   }
   
@@ -1429,7 +1415,7 @@ function setupFilterUI() {
   if (filterTagSelect) {
     filterTagSelect.addEventListener("change", (e) => {
       state.filterTag = e.target.value;
-      renderHistory();
+      resetPage(); renderHistory();
     });
   }
 }
@@ -1496,7 +1482,7 @@ function setupSortUI() {
         sortDirection = "asc";
       }
       
-      renderHistory();
+      resetPage(); renderHistory();
     });
   });
 }
@@ -1767,6 +1753,26 @@ async function confirmEdit() {
   renderHistory();
 }
 
+// ---------- Синхронизация между popup и history ----------
+function notifyHistoryUpdated() {
+  // Записываем timestamp в storage — history.html его поймает через onChanged
+  if (typeof chrome !== "undefined" && chrome.storage) {
+    chrome.storage.local.set({ "_historyUpdatedAt": Date.now() });
+  }
+}
+
+function listenForHistoryUpdates() {
+  if (typeof chrome === "undefined" || !chrome.storage?.onChanged) return;
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === "local" && changes["_historyUpdatedAt"]) {
+      loadHistory().then(() => {
+        renderHistory();
+        renderRecentDealsPopup();
+      });
+    }
+  });
+}
+
 // ---------- Дублирование сделки ----------
 async function duplicateDeal(id) {
   const r = state.rows.find(x => x.id === id);
@@ -1869,6 +1875,74 @@ function setupAutocomplete() {
     items.forEach((li, i) => li.classList.toggle("active", i === activeIdx));
     if (activeIdx >= 0) items[activeIdx].scrollIntoView({ block: "nearest" });
   }
+}
+
+// ---------- Rate Us ----------
+function maybeShowRateUs() {
+  // Уже показывали — не показываем снова
+  const shown = localStorage.getItem("smh_rateUsShown");
+  if (shown) return;
+
+  const total = state.rows.length;
+  const threshold = parseInt(localStorage.getItem("smh_rateUsThreshold") || "0");
+
+  // Устанавливаем порог один раз — случайное число от 5 до 20
+  if (!threshold) {
+    const rand = Math.floor(Math.random() * 16) + 5; // 5..20
+    localStorage.setItem("smh_rateUsThreshold", String(rand));
+    return;
+  }
+
+  if (total < threshold) return;
+
+  // Показываем тост
+  const existing = document.getElementById("rateUsToast");
+  if (existing) return;
+
+  const toast = document.createElement("div");
+  toast.id = "rateUsToast";
+  toast.className = "rate-us-toast";
+  toast.innerHTML = `
+    <div class="rate-us-content">
+      <span class="rate-us-stars">⭐⭐⭐⭐⭐</span>
+      <div class="rate-us-text">
+        <strong>Нравится расширение?</strong>
+        <span>Оставь отзыв — это очень помогает!</span>
+      </div>
+    </div>
+    <div class="rate-us-actions">
+      <a class="rate-us-btn primary" href="https://chromewebstore.google.com/detail/steam-market-helper/pmcknffccjjjacpjlpnkpodgbdnmojej/reviews" target="_blank" id="rateUsYes">⭐ Оценить</a>
+      <button class="rate-us-btn ghost" id="rateUsLater">Позже</button>
+      <button class="rate-us-btn ghost" id="rateUsNever">Не показывать</button>
+    </div>
+  `;
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => toast.classList.add("rate-us-toast-visible"));
+
+  document.getElementById("rateUsYes").addEventListener("click", () => {
+    localStorage.setItem("smh_rateUsShown", "1");
+    dismissRateUs();
+  });
+
+  document.getElementById("rateUsLater").addEventListener("click", () => {
+    // Сдвигаем порог ещё на 5-10 сделок
+    const next = total + Math.floor(Math.random() * 6) + 5;
+    localStorage.setItem("smh_rateUsThreshold", String(next));
+    dismissRateUs();
+  });
+
+  document.getElementById("rateUsNever").addEventListener("click", () => {
+    localStorage.setItem("smh_rateUsShown", "1");
+    dismissRateUs();
+  });
+}
+
+function dismissRateUs() {
+  const toast = document.getElementById("rateUsToast");
+  if (!toast) return;
+  toast.classList.remove("rate-us-toast-visible");
+  setTimeout(() => toast.remove(), 300);
 }
 
 // ---------- Боковое меню ----------
@@ -2480,11 +2554,19 @@ function renderHistory() {
   if (!tbody) return;
 
   tbody.innerHTML = "";
-  
+
   let rows = filterRows(state.rows || []);
   rows = sortRows(rows);
 
-  for (const r of rows) {
+  // Пагинация
+  const total = rows.length;
+  const pageSize = state.pageSize;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  if (state.currentPage > totalPages) state.currentPage = totalPages;
+  const start = (state.currentPage - 1) * pageSize;
+  const pageRows = rows.slice(start, start + pageSize);
+
+  for (const r of pageRows) {
     const tr = document.createElement("tr");
     const quantity = r.quantity || 1;
     
@@ -2605,6 +2687,7 @@ function renderHistory() {
   updateSortIndicators();
   updateTagFilterUI();
   renderRecentDealsPopup();
+  renderPagination(total);
   
   setTimeout(() => {
     updateCharts();
@@ -2643,6 +2726,73 @@ function setupHistoryTableActions() {
       }
     }
   });
+}
+
+// ---------- Пагинация ----------
+function renderPagination(total) {
+  const container = document.getElementById("paginationBar");
+  if (!container) return;
+
+  const pageSize = state.pageSize;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const cur = state.currentPage;
+
+  if (totalPages <= 1) {
+    container.innerHTML = "";
+    return;
+  }
+
+  // Диапазон отображаемых записей
+  const from = Math.min((cur - 1) * pageSize + 1, total);
+  const to = Math.min(cur * pageSize, total);
+
+  // Строим список страниц с «...»
+  const pages = buildPageList(cur, totalPages);
+
+  container.innerHTML = `
+    <div class="pagination">
+      <button class="pg-btn pg-prev" ${cur <= 1 ? "disabled" : ""} data-page="${cur - 1}">‹</button>
+      <div class="pg-pages">
+        ${pages.map(p => p === "…"
+          ? `<span class="pg-ellipsis">…</span>`
+          : `<button class="pg-btn pg-num ${p === cur ? "pg-active" : ""}" data-page="${p}">${p}</button>`
+        ).join("")}
+      </div>
+      <button class="pg-btn pg-next" ${cur >= totalPages ? "disabled" : ""} data-page="${cur + 1}">›</button>
+      <span class="pg-info">${from}–${to} из ${total}</span>
+      <select class="pg-size" title="Записей на странице">
+        ${[5, 10, 20].map(n =>
+          `<option value="${n}" ${n === pageSize ? "selected" : ""}>${n} / стр.</option>`
+        ).join("")}
+      </select>
+    </div>
+  `;
+
+  container.querySelectorAll(".pg-btn[data-page]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      state.currentPage = parseInt(btn.dataset.page);
+      renderHistory();
+      // Скроллим к верху таблицы
+      document.getElementById("historyTable")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  container.querySelector(".pg-size")?.addEventListener("change", (e) => {
+    state.pageSize = parseInt(e.target.value);
+    state.currentPage = 1;
+    renderHistory();
+  });
+}
+
+function buildPageList(cur, total) {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const pages = [];
+  pages.push(1);
+  if (cur > 3) pages.push("…");
+  for (let p = Math.max(2, cur - 1); p <= Math.min(total - 1, cur + 1); p++) pages.push(p);
+  if (cur < total - 2) pages.push("…");
+  pages.push(total);
+  return pages;
 }
 
 // ---------- JSON Export/Import ----------
@@ -2838,6 +2988,7 @@ async function init() {
   setupDonateModal();
   setupAutocomplete();
   initSidebar();
+  listenForHistoryUpdates();
   updateUILanguage();
 
   $("addBtn")?.addEventListener("click", addToHistory);

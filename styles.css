@@ -411,6 +411,33 @@ input, select{
   outline:none;
   font-size:14px;
 }
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+  cursor: pointer;
+}
+
+select option {
+  background: #1e2433;
+  color: #e8eaf0;
+}
+
+[data-theme="light"] select {
+  background-color: #fff8f0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  color: #3d2b1f;
+  border-color: rgba(120, 90, 50, 0.3);
+}
+
+[data-theme="light"] select option {
+  background: #fff8f0;
+  color: #3d2b1f;
+}
 input:focus, select:focus{border-color: rgba(120, 180, 255, .45)}
 .hint{
   color: var(--muted) !important;
@@ -693,7 +720,7 @@ mark {
 }
 
 /* History table readability */
-.history-card .table-wrap{ max-height: 420px; overflow:auto; }
+.history-card .table-wrap{ overflow-x: auto; }
 #historyTable th, #historyTable td{ white-space: nowrap; }
 #historyTable th:nth-child(3), #historyTable td:nth-child(3){
   white-space: normal;
@@ -701,10 +728,12 @@ mark {
 }
 
 
-.history-scroll thead th{
+.history-scroll thead th,
+#historyTable thead th {
   position: sticky;
   top: 0;
   z-index: 2000;
+  background: var(--card);
 }
 
 .history-scroll td, .history-scroll th{
@@ -1666,8 +1695,30 @@ td button:hover {
 /* Topbar selects */
 .topbar-select {
   width: auto;
-  padding: 4px 8px;
+  padding: 5px 28px 5px 10px;
   font-size: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.07);
+  color: var(--text);
+  font-weight: 500;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.topbar-select:hover {
+  border-color: rgba(80, 170, 255, 0.4);
+  background: rgba(80, 170, 255, 0.1);
+}
+
+[data-theme="light"] .topbar-select {
+  border-color: rgba(120, 90, 50, 0.25);
+  background: rgba(255, 248, 235, 0.9);
+  color: #3d2b1f;
+}
+
+[data-theme="light"] .topbar-select:hover {
+  border-color: rgba(120, 90, 50, 0.5);
+  background: #fff8f0;
 }
 
 /* Search container */
@@ -2193,4 +2244,201 @@ body.popup-extension .form-grid {
 
 [data-theme="light"] .autocomplete-item mark {
   color: #7a5c3a;
+}
+
+/* ============================================================
+   ПАГИНАЦИЯ
+   ============================================================ */
+#paginationBar {
+  padding: 12px 0 4px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.pg-pages {
+  display: flex;
+  gap: 3px;
+}
+
+.pg-btn {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pg-btn:hover:not(:disabled) {
+  background: rgba(80, 170, 255, 0.15);
+  border-color: rgba(80, 170, 255, 0.4);
+}
+
+.pg-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.pg-btn.pg-active {
+  background: rgba(80, 170, 255, 0.25);
+  border-color: rgba(80, 170, 255, 0.6);
+  color: #7ecfff;
+  font-weight: 700;
+}
+
+.pg-prev, .pg-next {
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+.pg-ellipsis {
+  width: 28px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.pg-info {
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.pg-size {
+  margin-left: auto;
+  height: 32px;
+  padding: 0 24px 0 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+  width: auto;
+}
+
+[data-theme="light"] .pg-btn:hover:not(:disabled) {
+  background: rgba(120, 90, 50, 0.1);
+  border-color: rgba(120, 90, 50, 0.3);
+}
+
+[data-theme="light"] .pg-btn.pg-active {
+  background: rgba(120, 90, 50, 0.15);
+  border-color: rgba(120, 90, 50, 0.5);
+  color: #7a5c3a;
+}
+
+/* ============================================================
+   RATE US TOAST
+   ============================================================ */
+.rate-us-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--card);
+  border: 1px solid rgba(255, 200, 50, 0.35);
+  border-radius: 16px;
+  padding: 14px 16px;
+  width: 300px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  z-index: 99999;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.rate-us-toast-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rate-us-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.rate-us-stars {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.rate-us-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rate-us-text strong {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.rate-us-text span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.rate-us-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.rate-us-btn {
+  flex: 1;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.15s;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.rate-us-btn.primary {
+  background: rgba(255, 200, 50, 0.2);
+  border-color: rgba(255, 200, 50, 0.5);
+  color: #ffc832;
+}
+
+.rate-us-btn.primary:hover {
+  background: rgba(255, 200, 50, 0.35);
+}
+
+.rate-us-btn.ghost {
+  background: transparent;
+  color: var(--muted);
+}
+
+.rate-us-btn.ghost:hover {
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+}
+
+[data-theme="light"] .rate-us-toast {
+  box-shadow: 0 8px 32px rgba(120,90,60,0.15);
+}
+
+[data-theme="light"] .rate-us-btn.ghost:hover {
+  background: rgba(0,0,0,0.05);
 }
