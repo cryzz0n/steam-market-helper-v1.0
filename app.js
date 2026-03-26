@@ -1318,39 +1318,60 @@ async function confirmBulkDelete() {
 let filterStatus = "all";
 let filterDate = "all";
 let searchQuery = "";
+let chartUpdateTimer = null;
+let searchInputTimer = null;
+
+function getDealTimestamp(row) {
+  if (Number.isFinite(row._ts)) return row._ts;
+  if (!row.date) return NaN;
+  const ts = Date.parse(`${row.date}T00:00:00`);
+  row._ts = ts;
+  return ts;
+}
 
 function filterRows(rows) {
+  const now = new Date();
+  const nowTs = now.getTime();
+  const query = searchQuery.trim().toLowerCase();
+  const startOfTodayTs = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  const hasDateQuickFilter = filterDate !== "all";
+  const hasDateRange = Boolean(state.dateFrom || state.dateTo);
+  const fromTs = state.dateFrom ? new Date(state.dateFrom).getTime() : null;
+  const toTs = state.dateTo
+    ? new Date(`${state.dateTo}T23:59:59`).getTime()
+    : null;
+  const weekAgoTs = nowTs - (7 * 24 * 60 * 60 * 1000);
+  const monthAgoTs = nowTs - (30 * 24 * 60 * 60 * 1000);
+  const yearAgoTs = nowTs - (365 * 24 * 60 * 60 * 1000);
+
   return rows.filter(r => {
     // Фильтр по статусу
     if (filterStatus !== "all" && r.status !== filterStatus) return false;
     
-    // Фильтр по дате (быстрый)
-    if (filterDate !== "all") {
-      const dealDate = new Date(r.date);
-      const today = new Date();
-      const diffTime = today - dealDate;
-      const diffDays = diffTime / (1000 * 60 * 60 * 24);
-      
+    // Фильтр по дате
+    if (hasDateQuickFilter || hasDateRange) {
+      const dealTs = getDealTimestamp(r);
+      if (!Number.isFinite(dealTs)) return false;
+
+      // Быстрый фильтр
       switch (filterDate) {
-        case "today": if (diffDays > 1) return false; break;
-        case "week": if (diffDays > 7) return false; break;
-        case "month": if (diffDays > 30) return false; break;
-        case "year": if (diffDays > 365) return false; break;
+        case "today":
+          if (dealTs < startOfTodayTs || dealTs > nowTs) return false;
+          break;
+        case "week":
+          if (dealTs < weekAgoTs || dealTs > nowTs) return false;
+          break;
+        case "month":
+          if (dealTs < monthAgoTs || dealTs > nowTs) return false;
+          break;
+        case "year":
+          if (dealTs < yearAgoTs || dealTs > nowTs) return false;
+          break;
       }
-    }
-    
-    // Фильтр по пользовательскому диапазону дат
-    if (state.dateFrom || state.dateTo) {
-      const dealDate = new Date(r.date);
-      if (state.dateFrom) {
-        const fromDate = new Date(state.dateFrom);
-        if (dealDate < fromDate) return false;
-      }
-      if (state.dateTo) {
-        const toDate = new Date(state.dateTo);
-        toDate.setHours(23, 59, 59);
-        if (dealDate > toDate) return false;
-      }
+
+      // Пользовательский диапазон
+      if (fromTs !== null && dealTs < fromTs) return false;
+      if (toTs !== null && dealTs > toTs) return false;
     }
     
     // Фильтр по тегу
@@ -1359,9 +1380,9 @@ function filterRows(rows) {
     }
 
     // Поиск по тексту
-    if (searchQuery) {
-      const itemMatch = r.item.toLowerCase().includes(searchQuery.toLowerCase());
-      const notesMatch = state.searchInNotes && r.notes && r.notes.toLowerCase().includes(searchQuery.toLowerCase());
+    if (query) {
+      const itemMatch = (r.item || "").toLowerCase().includes(query);
+      const notesMatch = state.searchInNotes && r.notes && r.notes.toLowerCase().includes(query);
       if (!itemMatch && !notesMatch) return false;
     }
     
@@ -1379,7 +1400,10 @@ function setupFilterUI() {
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
       searchQuery = e.target.value;
-      renderHistory();
+      if (searchInputTimer) clearTimeout(searchInputTimer);
+      searchInputTimer = setTimeout(() => {
+        renderHistory();
+      }, 120);
     });
   }
   
@@ -2480,6 +2504,7 @@ function renderHistory() {
   if (!tbody) return;
 
   tbody.innerHTML = "";
+  const fragment = document.createDocumentFragment();
   
   let rows = filterRows(state.rows || []);
   rows = sortRows(rows);
@@ -2598,17 +2623,22 @@ function renderHistory() {
     }
 
     tr.appendChild(actions);
-    tbody.appendChild(tr);
+    fragment.appendChild(tr);
   }
+
+  tbody.appendChild(fragment);
   
   updateStats();
   updateSortIndicators();
   updateTagFilterUI();
   renderRecentDealsPopup();
   
-  setTimeout(() => {
+  if (chartUpdateTimer) {
+    clearTimeout(chartUpdateTimer);
+  }
+  chartUpdateTimer = setTimeout(() => {
     updateCharts();
-  }, 100);
+  }, 120);
 }
 
 // Delegated actions
